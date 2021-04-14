@@ -6,10 +6,13 @@ on:
       - main
   schedule:
     - cron: "0,30 * * * *"
+  watch:
+    types: [started]
 
 jobs:
   install-and-run:
     runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - uses: actions/checkout@v2
       - name: Setup timezone
